@@ -1,7 +1,7 @@
 let list = [
   {
     id: 1,
-    content: "Zob cos",
+    content: "do something",
     isDone: false,
   },
 ];
@@ -15,24 +15,23 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 addButton.addEventListener("click", function () {
-  console.log("click");
-
   addInput.classList.toggle("hide");
 });
 
 addInput.addEventListener("keypress", function (e) {
-    var size=Object.keys(list).length;
+  let size = Object.keys(list).length;
   let inputvalue = addInput.value;
   if (e.key === "Enter") {
     let element = { id: 2, content: inputvalue, isDone: false };
-    list[size+1] = element;
+    list[size + 1] = element;
 
     addInput.classList.toggle("hide");
-    addInput.value="";
+    addInput.value = "";
   }
-  
+
   loadItems(list);
 });
+
 function loadItems(menu) {
   let displayItems = menu.map(function (item) {
     return ` <div class="item">
