@@ -1,10 +1,26 @@
-let list = [
-  {
-    id: 1,
-    content: "do something",
-    isDone: false,
-  },
-];
+let list;
+const savedList = JSON.parse(localStorage.getItem("list"));
+
+if (Array.isArray(savedList)) list = savedList;
+else {
+  list = [
+    {
+      id: 0,
+      content: "do something",
+      isDone: false,
+    },
+  ];
+}
+function createItem(content) {
+  let id = list.length;
+  let element = { id: id, content: content, isDone: false };
+  list.push(element);
+  saveItem();
+}
+
+function saveItem() {
+  localStorage.setItem("list", JSON.stringify(list));
+}
 
 const addButton = document.querySelector(".add-button");
 const addInput = document.querySelector(".add-item-input");
@@ -17,13 +33,11 @@ window.addEventListener("DOMContentLoaded", function () {
 addButton.addEventListener("click", function () {
   addInput.classList.toggle("hide");
 });
-
 addInput.addEventListener("keypress", function (e) {
   let size = Object.keys(list).length;
   let inputvalue = addInput.value;
   if (e.key === "Enter") {
-    let element = { id: 2, content: inputvalue, isDone: false };
-    list[size + 1] = element;
+    createItem(inputvalue);
 
     addInput.classList.toggle("hide");
     addInput.value = "";

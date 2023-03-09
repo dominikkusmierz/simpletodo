@@ -76,13 +76,14 @@ body {
   margin-top:0;
   height:70px;
   transform:translate(0,-100px);
-  width:300px;
+  width:500px;
   border-radius:15px;
   border-width:1px;
   opacity:0.9;
   border-color:rgb(199, 198, 198);
   font-size:20px;
   padding-left:20px;
+  transition:ease-in-out .5s;
 }
 
 .hide{
@@ -92,14 +93,10 @@ body {
 
 .add-button {
   border-radius: 100%;
-  position: relative;
-  top:400px;
-  left:125px;
+  position:relative;
+  top:35rem;
   height: 100px;
   width: 100px;
-  display: grid;
-  place-items: center;
-
   border-style: none;
   background-color: rgb(250, 162, 0);
 }
