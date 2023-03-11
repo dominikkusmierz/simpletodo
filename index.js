@@ -1,6 +1,8 @@
+//model----------------------------------------------------------------------------------
+
 let list;
 const savedList = JSON.parse(localStorage.getItem("list"));
-//model//////////////
+
 if (Array.isArray(savedList)) list = savedList;
 else {
   list = [
@@ -46,7 +48,8 @@ function removeItem(id) {
   });
 }
 
-//controller/////////////
+//controller----------------------------------------------------------------------------------
+
 function deleteItem(e) {
   const deleteButton = e.target;
   const idToDelete = deleteButton.id;
@@ -83,7 +86,9 @@ addInput.addEventListener("keypress", function (e) {
 
   render();
 });
-//view//////////////////////
+
+//view----------------------------------------------------------------------------------
+
 //Items made in this day
 function currentItems(menu) {
   const itembox = document.querySelector(".items");

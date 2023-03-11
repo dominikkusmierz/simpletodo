@@ -78,6 +78,7 @@ body {
 
 .item {
   position: relative;
+  word-break:break-all;
 }
 .delete-button {
   position: absolute;
