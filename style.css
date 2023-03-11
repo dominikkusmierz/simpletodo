@@ -14,9 +14,9 @@ body {
   box-shadow: 8px 8px 46px -16px rgba(66, 68, 90, 1);
   background-color: rgb(255, 255, 255);
   height: 600px;
-  aspect-ratio: 6/10;
   opacity: 0.8;
   border-radius: 20px;
+  width:400px;
 }
 
 .menu {
@@ -86,20 +86,29 @@ body {
   color:#2a2a2a;
 }
 
-
 .add-item-input{
-  margin-top:0;
-  height:70px;
-  transform:translate(0,-100px);
-  width:500px;
-  border-radius:15px;
-  border-width:1px;
-  opacity:0.9;
-  border-color:rgb(199, 198, 198);
+  margin-top:10px;
+  height:60px;
+  width:388px;
+  border:none;
+  background-color:rgb(246, 246, 246);
+  border-bottom:1px rgb(217, 217, 217) solid;
+  border-top:1px rgb(217, 217, 217) solid;
   font-size:20px;
-  padding-left:20px;
-  transition:ease-in-out .5s;
+  transition:ease-in-out .2s;
+  padding-left:10px;
 }
+.add-item-input::placeholder{
+  padding-left:15px;
+}
+.add-item-input:focus{
+ 
+  outline:none;
+  background-color:rgb(235, 235, 235);
+}
+
+
+
 
 .hide{
   height:0px;
@@ -117,5 +126,6 @@ body {
 }
 .add-button:hover {
   background-color: rgb(234, 152, 0);
+  cursor:pointer;
 }
 

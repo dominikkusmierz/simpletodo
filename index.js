@@ -8,12 +8,24 @@ else {
       id: 0,
       content: "do something",
       isDone: false,
+      date: "1999-10-12",
     },
   ];
 }
+function getDate(){
+  const date=new Date();
+  const day = date.getDay();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const myDate = year + "-" + month + "-" + day;
+  return myDate;
+}
 function createItem(content) {
-  const id = new Date().getTime();
-  let element = { id: id, content: content, isDone: false };
+  const date = new Date();
+  const id = date.getTime();
+  let myDate=getDate();
+  console.log(myDate);
+  let element = { id: id, content: content, isDone: false, date: myDate };
   list.push(element);
   saveItem();
 }
@@ -23,7 +35,7 @@ function saveItem() {
 }
 
 function removeItem(id) {
-  list=list.filter(function (item) {
+  list = list.filter(function (item) {
     if (item.id == id) {
       return false;
     } else {
@@ -38,19 +50,20 @@ function deleteItem(e) {
   console.log(idToDelete);
   removeItem(idToDelete);
   saveItem();
-  loadItems(list);
+  render();
 }
 
 const addButton = document.querySelector(".add-button");
 const addInput = document.querySelector(".add-item-input");
 const items = document.querySelector(".items");
 window.addEventListener("DOMContentLoaded", function () {
-  loadItems(list);
+  render();
   const deleteButton = document.querySelector(".delete-button");
 });
 
 addButton.addEventListener("click", function () {
   addInput.classList.toggle("hide");
+  addInput.focus();
 });
 
 addInput.addEventListener("keypress", function (e) {
@@ -63,25 +76,19 @@ addInput.addEventListener("keypress", function (e) {
     addInput.value = "";
   }
 
-  loadItems(list);
+ render();
 });
 
-function loadItems(menu) {
-  // let displayItems = menu.map(function (item) {
-  //   return ` <div class="item">
-  //               <input type="checkbox" name="" id=""> <p>${item.content}</p>
-  //           </div>`;
-  // });
-
-  //
+function currentItems(menu) {
+ 
   const itembox = document.querySelector(".items");
   itembox.innerHTML = "";
 
   menu.forEach(function (menu) {
+    if(getDate()==menu.date){
     const item = document.createElement("div");
     item.classList = "item";
     item.innerText = menu.content;
-
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList = "item-checkbox";
@@ -94,5 +101,14 @@ function loadItems(menu) {
     item.appendChild(deleteButton);
     items.appendChild(item);
     item.prepend(checkbox);
+    }
   });
 }
+
+
+function render(){
+  
+currentItems(list);
+}
+
+
