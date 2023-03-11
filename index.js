@@ -15,9 +15,23 @@ else {
   ];
 }
 function getDate() {
+  
   const date = new Date();
-  const day = date.getDay();
-  const month = date.getMonth() + 1;
+  let day;
+  if(parseInt(date.getUTCDate())<10){
+     day="0"+date.getUTCDate();
+  }else{
+     day = date.getUTCDate();
+  };
+
+  let month;
+  if(parseInt(date.getMonth())<10){
+    let mm=date.getMonth()+1;
+     month="0"+mm;
+  }else{
+     month = date.getMonth()+1;
+  };
+  
   const year = date.getFullYear();
   const myDate = year + "-" + month + "-" + day;
   return myDate;
@@ -53,7 +67,6 @@ function removeItem(id) {
 function deleteItem(e) {
   const deleteButton = e.target;
   const idToDelete = deleteButton.id;
-  console.log(idToDelete);
   removeItem(idToDelete);
   saveItem();
   render();
@@ -62,9 +75,16 @@ function deleteItem(e) {
 const addButton = document.querySelector(".add-button");
 const addInput = document.querySelector(".add-item-input");
 const items = document.querySelector(".items");
+const actual = document.querySelector(".actual");
+const done = document.querySelector(".done");
+const container=document.querySelector(".container");
+const prevDate=document.querySelector(".prev");
+const nextDate=document.querySelector(".next");
+const datePicker=document.querySelector(".datePicker");
+const dateContainer=document.querySelector(".dateContainer");
 window.addEventListener("DOMContentLoaded", function () {
   render();
-  const deleteButton = document.querySelector(".delete-button");
+
 });
 //button + click event
 
@@ -86,13 +106,42 @@ addInput.addEventListener("keypress", function (e) {
 
   render();
 });
+//selector
+actual.addEventListener("click", function () {
+  if (actual.classList.contains("menuselected")) {
+    return;
+  } else {
+    addInput.classList.toggle("hide");
+    actual.classList.toggle("menuselected");
+    done.classList.toggle("menuselected");
+    dateContainer.classList.toggle("hide");
+  }
+  render();
+});
 
+done.addEventListener("click", function () {
+  if (done.classList.contains("menuselected")) {
+    
+    return;
+  } else {
+    dateContainer.classList.toggle("hide");
+    addInput.classList.toggle("hide");
+    actual.classList.toggle("menuselected");
+    done.classList.toggle("menuselected");
+  }
+  render();
+});
+//date buttons
+datePicker.addEventListener('change',function(){
+  console.log("change");
+  render();
+  
+})
 //view----------------------------------------------------------------------------------
 
 //Items made in this day
 function currentItems(menu) {
-  const itembox = document.querySelector(".items");
-  itembox.innerHTML = "";
+  items.innerHTML = "";
 
   menu.forEach(function (menu) {
     if (getDate() == menu.date) {
@@ -115,7 +164,30 @@ function currentItems(menu) {
   });
 }
 
+
+function oldItems(menu) {
+ 
+  items.innerHTML = "";
+  
+  console.log("data" + datePicker.value);
+  menu.forEach(function (menu) {
+  let selectedDate="";
+  console.log(menu.date);
+    if (datePicker.value == menu.date) {
+      const item = document.createElement("div");
+      item.classList = "item";
+      item.innerText = menu.content;
+      items.appendChild(item);
+    }
+  });
+ 
+}
+
 //rendering all items
 function render() {
-  currentItems(list);
+  if (actual.classList.contains("menuselected")) {
+    currentItems(list);
+  } else {
+    oldItems(list);
+  }
 }

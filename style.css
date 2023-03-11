@@ -19,6 +19,8 @@ body {
   width: 400px;
   display: flex;
   flex-direction: column;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .menu {
@@ -28,11 +30,10 @@ body {
 }
 
 .actual {
-  background-color: rgba(255, 255, 255, 0.113);
+  background-color: rgba(0, 0, 0, 0.113);
   flex: 1;
   display: grid;
   place-items: center;
-  border-radius: 20px;
   border-top-left-radius: 20px;
 }
 
@@ -43,7 +44,9 @@ body {
   place-items: center;
   border-top-right-radius: 20px;
 }
-
+.menuselected{
+  background-color:rgba(255, 255, 255, 0.113);
+}
 .items {
   padding-top: 20px;
   font-weight: 100;
@@ -113,12 +116,22 @@ body {
   outline: none;
   background-color: rgb(235, 235, 235);
 }
-
+.dateContainer{
+  display:flex;
+  justify-content:space-around;
+}
 .hide {
   height: 0px;
   opacity: 0;
 }
-
+.datePicker{
+  height:60px;
+  width:100%;
+  border:none;
+  font-size:30px;
+  color:#797979;
+  background-color: rgb(246, 246, 246);
+}
 .add-button {
   border-radius: 100%;
   height: 50px;
